@@ -196,17 +196,18 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
           }
         }
       }
-
-      questions = {
-        ...questions,
-        [qid]: {
-          ...questions[qid],
-          [answer]: {
-            ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser])
-          }
-        }
-      }
+      console.log(`qid is: ${qid} and answer is: ${answer} and the user is ${authedUser}`)
+      var hard = ['a','b']
+      //questions = {
+        //...questions,
+        //[qid]: {
+        //  ...questions[qid],
+        //  [answer]: {
+          //  ...questions[qid][answer],
+          //  votes: questions[qid][answer].votes
+        //  }
+      //  }
+      //}
 
       res()
     }, 500)
