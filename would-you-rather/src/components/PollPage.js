@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleQuestionAnswerPoll  } from '../actions/polls'
+import { handleQuestionAnswerUser } from '../actions/users'
 import Poll from './poll'
 
 class PollPage extends Component{
@@ -9,7 +10,7 @@ class PollPage extends Component{
     answer: '',
   }
   handleChange = (e) => {
-    console.log(`in handle change and the answer is${e.target.value}`)
+
     this.setState({answer: e.target.value})
   }
 
@@ -17,8 +18,9 @@ class PollPage extends Component{
     e.preventDefault()
     const answer = this.state.answer
     const {dispatch, id, authedUser} = this.props
-    console.log(`in component the answer is: ${authedUser}`)
+
     dispatch(handleQuestionAnswerPoll(authedUser, id, answer))
+    dispatch(handleQuestionAnswerUser(authedUser, id, answer))
   }
 
   render(){
@@ -53,7 +55,6 @@ class PollPage extends Component{
 
 function mapStateToProps ({authedUser, polls, users}, props){
   const { id } = props.match.params
-  console.log(`in mapstate and autheduser is ${authedUser}`)
   return{
     id,
     authedUser,
