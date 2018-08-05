@@ -7,7 +7,7 @@ import Poll from './poll'
 class PollPage extends Component{
 
   state = {
-    answer: '',
+    answer: 'optionOne',
   }
   handleChange = (e) => {
 
@@ -52,6 +52,7 @@ class PollPage extends Component{
     )
   }
 }
+
 
 function mapStateToProps ({authedUser, polls, users}, props){
   const { id } = props.match.params
