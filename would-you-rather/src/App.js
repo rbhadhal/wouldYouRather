@@ -16,9 +16,9 @@ class App extends Component {
         <LoadingBar/>
         {this.props.loading === true
           ? null
-          //:<Dashboard/>
+          :<Dashboard/>
           //:<NewPoll/>
-          :<PollPage match={{params: {id: '6ni6ok3ym7mf1p33lnez'}}}/>
+          //:<PollPage match={{params: {id: '6ni6ok3ym7mf1p33lnez'}}}/>
         }
       </div>
     )

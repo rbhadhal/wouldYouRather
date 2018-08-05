@@ -21,9 +21,10 @@ class NewPoll extends Component{
   handleSubmit = (e) => {
     e.preventDefault()
     const {questionOne, questionTwo} = this.state
-    const {dispatch, id} = this.props
+    const {dispatch, id, authedUser} = this.props
     console.log(`quesiton one: ${questionOne} quesiton two: ${questionTwo}`)
     dispatch(handleAddPoll(questionOne, questionTwo, id))
+
 
 
   }
