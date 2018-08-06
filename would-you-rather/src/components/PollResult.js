@@ -4,6 +4,7 @@ import { formatQuestion } from '../_DATA'
 
 class PollResult extends Component{
 
+    render(){
     const {poll, user} = this.props
 
     if (poll === null){
@@ -14,8 +15,8 @@ class PollResult extends Component{
     const optionOneCount = optionOne.votes.length
     const optionTwoCount = optionTwo.votes.length
     const totalCount = optionOneCount + optionTwoCount
-    const optionOnePercent = optionOneCount / totalCount
-    const optionTwoPercent = optionTwoCount / totalCount
+    const optionOnePercent = optionOneCount / totalCount * 100
+    const optionTwoPercent = optionTwoCount / totalCount * 100
 
     return(
       <div className='poll'>
@@ -26,9 +27,17 @@ class PollResult extends Component{
           className='avatar'
         />
         <div className='poll-info'>
-          <h3>{`${user.name} asks would you rather:`}</h3>
+          <h3>{`${user.name} asked would you rather:`}</h3>
           <br/>
-          <span>{optionOne.text} or {optionTwo.text}</span>
+          <span>{optionOneCount} voted for Option One: {optionOne.text} which was {optionOnePercent}%</span>
+          <br/>
+          <span>{optionTwoCount} voted for Option Two: {optionTwo.text} which was {optionTwoPercent}%</span>
+          <br/>
+          <span>You {this.props.authedUser} voted for {this.props.authAnswer}</span>
+
+          <div className='results'>
+
+          </div>
 
         </div>
       </div>
@@ -36,15 +45,20 @@ class PollResult extends Component{
   }
 }
 
-function mapStateToProps({users, authedUser, polls}, {id}){
+
+function mapStateToProps({users, authedUser, polls}, props){
+  const { id } = props.match.params
   const poll = polls[id]
+  console.log(id)
+  //console.log(`in poll result map state to props users is ${users} and authedUSer is ${authedUser} and poll is ${poll.id}`)
   const user = users[poll.author]
 
   return {
     authedUser,
     user: user,
-    poll: poll
+    poll: poll,
+    authAnswer: users[authedUser].answers[id]
   }
 }
 
-export default connect(mapStateToProps)(Poll)
+export default connect(mapStateToProps)(PollResult)

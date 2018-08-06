@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion } from '../_DATA'
+import { Link, withRouter } from 'react-router-dom'
 
 class Poll extends Component{
 
-  viewPoll = (e, poll) =>
+  viewPoll = (e, poll) => {
     e.preventDefault()
-  // TODO: redirect to submit page
+
+    }
+
   render(){
     const {poll, user} = this.props
 
@@ -23,7 +26,7 @@ class Poll extends Component{
     console.log(this.props)
     return(
       <div className='poll'>
-
+        <Link to={`/questions/${this.props.id}`} className='tweet'>
         <img
           src={user.avatarURL}
           alt={`Avatar of ${user.name}`}
@@ -37,6 +40,7 @@ class Poll extends Component{
             View Question
           </button>
         </div>
+      </Link>
       </div>
     )
   }

@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import React, { Component, Fragment } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData} from './actions/shared'
+import { connect } from 'react-redux'
 import Dashboard from './components/Dashboard'
 import LoadingBar from 'react-redux-loading'
 import NewPoll from './components/NewPoll'
 import PollPage from './components/PollPage'
+import PollResult from './components/PollResult'
+import Nav from './components/Nav'
 
 class App extends Component {
   componentDidMount(){
@@ -12,15 +15,21 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <LoadingBar/>
-        {this.props.loading === true
-          ? null
-          :<Dashboard/>
-          //:<NewPoll/>
-          //:<PollPage match={{params: {id: '6ni6ok3ym7mf1p33lnez'}}}/>
-        }
-      </div>
+      <Router>
+          <Fragment>
+            <LoadingBar />
+            <div className='container'>
+              <Nav className='nav'/>
+              {this.props.loading === true
+                ? null
+                : <div>
+                    <Route path='/' exact component={Dashboard} />
+                    <Route path='/questions/:id' component={PollPage} />
+                    <Route path='/add' component={NewPoll} />
+                  </div>}
+            </div>
+          </Fragment>
+        </Router>
     )
   }
 }
