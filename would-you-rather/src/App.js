@@ -24,9 +24,10 @@ class App extends Component {
               {this.props.loading === true
                 ? null
                 : <div>
-                    <Route path='/' exact component={Leaderboard} />
+                    <Route path='/' exact component={Dashboard} />
                     <Route path='/questions/:id' component={PollPage} />
                     <Route path='/add' component={NewPoll} />
+                    <Route path='/leaderboard' component={Leaderboard}/>
                   </div>}
             </div>
           </Fragment>
