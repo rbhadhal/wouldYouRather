@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatQuestion } from '../_DATA'
+
 
 class PollResult extends Component{
 
@@ -46,8 +46,8 @@ class PollResult extends Component{
 }
 
 
-function mapStateToProps({users, authedUser, polls}, props){
-  const { id } = props.match.params
+function mapStateToProps({users, authedUser, polls}, {id}){
+  //const { id } = id
   const poll = polls[id]
   console.log(id)
   //console.log(`in poll result map state to props users is ${users} and authedUSer is ${authedUser} and poll is ${poll.id}`)
