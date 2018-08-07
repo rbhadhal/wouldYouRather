@@ -4,10 +4,15 @@ import Poll from './poll'
 import { setAuthedUser } from '../actions/authedUser'
 
 class Dashboard extends Component {
+
+
+
   state = {
     display: 'unanswered',
-    loggedIn: '',
+    loggedIn: this.props.authedUser,
   }
+
+
 
   handleChange = (e) => {
     const v = e.target.value
@@ -16,6 +21,8 @@ class Dashboard extends Component {
 
     }))
   }
+
+
   handleUserChange = (e) => {
     const u = e.target.value
     const dispatch = this.props.dispatch
@@ -24,17 +31,31 @@ class Dashboard extends Component {
       loggedIn: u,
     }))
   }
-// TODO: sort the answered array by timestamp
-  render(){
 
-    const allPolls = this.props.pollIds
-    const answered = this.props.answered
-    const unanswered = allPolls.filter(f => !answered.includes(f))
+  render(){
+    let allPolls =[]
+    let answered = []
+    let unanswered = []
+    let polls = []
+    let sortedAnswer = []
+    console.log(this.props.authedUser)
+    if (this.props.authedUser !== '' ){
+      polls = this.props.polls
+     allPolls = this.props.pollIds
+     answered = Object.keys(this.props.users[this.props.authedUser].answers)
+     sortedAnswer = Object.keys(answered).sort((a,b) => polls[answered[a]].timestamp - polls[answered[b]].timestamp)
+     unanswered = allPolls.filter(f => !answered.includes(f))
+     console.log(`sorted answer : ${sortedAnswer}`)
+  }
+
+
+
 
 
     return(
-      !this.state.loggedIn ? (
+      !this.props.authedUser ? (
         <form>
+            {console.log(`in form area`)}
           <label>
             Please login first:
           <select value={this.state.loggedIn} onChange={this.handleUserChange}>
@@ -45,8 +66,11 @@ class Dashboard extends Component {
         </label>
         </form>
 
+
       ) :
+
       <div>
+          {console.log(`show be showing some data`)}
         <h3 className='center'> Your Questions </h3>
         <form >
           <label>
@@ -82,12 +106,14 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps({polls, authedUser, users}, props){
-  console.log(`in map state dashboard and authed user is ${authedUser} and user is ${Object.keys(users[authedUser].answers)}`)
+  //console.log(`in map state dashboard and authed user is ${authedUser} and user is ${Object.keys(users[authedUser].answers)}`)
   return{
 
     pollIds: Object.keys(polls)
       .sort((a,b) => polls[b].timestamp - polls[a].timestamp),
-    answered: Object.keys(users[authedUser].answers)
+    users: users,
+    authedUser,
+    polls,
   }
 }
 export default connect(mapStateToProps)(Dashboard)
