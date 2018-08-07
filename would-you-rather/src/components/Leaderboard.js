@@ -32,21 +32,27 @@ console.log(`sorted array ${sortedArray}`)
 
 console.log(`sorted array first total is ${sortedArray[0]} and the last item is ${sortedArray[4]}`)
 return(
+    this.props.authedUser === '' ? ( <b> Please go to Home screen and logon first </b>
+
+    ) :
+    (
     sortedArray.map((s) => (
+
     <div className='poll'>
+
       <img
         src={t[s].avatar}
         alt={`Avatar of ${t[s].name}`}
         className='avatar'
       />
+
       <div className='poll-info'>
         <h3>{`${t[s].name} has a total score of: ${t[s].total}`}</h3>
         <br/>
         <span>Has asked {t[s].questions} and answered: {t[s].answered}</span>
-
       </div>
-
     </div>
+    )
   )
 
 )
@@ -54,10 +60,11 @@ return(
 }
 }
 
-function mapStateToProps({users}){
+function mapStateToProps({users, authedUser}){
   //console.log(`in map state Leaderboard and authed user is ${authedUser} and user is ${Object.keys(users[authedUser].answers)}`)
   return{
     users: users,
+    authedUser,
   }
 }
 export default connect(mapStateToProps)(Leaderboard)
