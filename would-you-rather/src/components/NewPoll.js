@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { handleAddPoll  } from '../actions/polls'
 import { connect } from 'react-redux'
+import { NavLink, Link, withRouter, Redirect } from 'react-router-dom'
 
 class NewPoll extends Component{
 
   state = {
     questionOne: '',
     questionTwo: '',
+    home: false,
   }
 
   handleChange = (e) => {
@@ -24,14 +26,26 @@ class NewPoll extends Component{
     const {dispatch, id, authedUser} = this.props
     console.log(`quesiton one: ${questionOne} quesiton two: ${questionTwo}`)
     dispatch(handleAddPoll(questionOne, questionTwo, id))
+    this.setState(() => ({
+      home: true,
+    }))
 
 
 
   }
   render(){
     const {questionOne, questionTwo} = this.state
+
+    console.log(`In render method of new poll and home is set to ${this.state.home}`)
+    const { home } = this.state
+    if (home === true){
+      return <Redirect to='/'/>
+    }
+
     return(
+
     <div>
+
       <h3 className='center'>
         Would you rather: please enter two questions
       </h3>
@@ -53,7 +67,10 @@ class NewPoll extends Component{
         </label>
         <input type='submit' value='submit' disabled={questionOne === '' || questionTwo === ''}/>
       </form>
+
     </div>
+
+
   )
   }
 }

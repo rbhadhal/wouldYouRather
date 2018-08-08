@@ -43,7 +43,7 @@ class Dashboard extends Component {
       polls = this.props.polls
      allPolls = this.props.pollIds
      answered = Object.keys(this.props.users[this.props.authedUser].answers)
-     sortedAnswer = Object.keys(answered).sort((a,b) => polls[answered[a]].timestamp - polls[answered[b]].timestamp)
+     sortedAnswer = Object.keys(answered).sort((a,b) => polls[answered[b]].timestamp - polls[answered[a]].timestamp)
      unanswered = allPolls.filter(f => !answered.includes(f))
      console.log(`sorted answer : ${sortedAnswer}`)
   }
