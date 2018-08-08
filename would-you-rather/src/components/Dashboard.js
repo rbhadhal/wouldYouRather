@@ -91,10 +91,10 @@ class Dashboard extends Component {
 
               <Poll id={id}/>
             </li>
-          )) : answered.map((id) => (
+          )) : sortedAnswer.map((id) => (
             <li key={id}>
 
-              <Poll id={id}/>
+              <Poll id={answered[id]}/>
             </li>))
           }
         </ul>
