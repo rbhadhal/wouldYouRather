@@ -35,14 +35,19 @@ class NewPoll extends Component{
   }
   render(){
     const {questionOne, questionTwo} = this.state
+    console.log(`authed user of new poll is ${this.props.authedUser}`)
 
     console.log(`In render method of new poll and home is set to ${this.state.home}`)
     const { home } = this.state
     if (home === true){
       return <Redirect to='/'/>
     }
-
+    if (this.props.authedUser === '')
+    {
+      return <Redirect to='/'/>
+    }
     return(
+
 
     <div>
 
@@ -75,4 +80,11 @@ class NewPoll extends Component{
   }
 }
 
-export default connect()(NewPoll)
+function mapStateToProps ({authedUser}, props){
+  return{
+    authedUser,
+
+  }
+}
+
+export default connect(mapStateToProps)(NewPoll)
