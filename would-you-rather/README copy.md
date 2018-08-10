@@ -1,10 +1,41 @@
 # Would You Rather Project
 
-This is the starter code for the final assessment project for Udacity's React & Redux course.
+This is the code for the Would You Rather Project. To install use 'npm install' and to run 'npm start'
 
-The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
-
-Using the provided starter code, you'll build a React/Redux front end for the application. We recommend using the [Create React App](https://github.com/facebook/create-react-app) to bootstrap the project.
+# Structure
+my-app/
+  README.md
+  node_modules/
+  package.json
+  public/
+    index.html
+    favicon.ico
+  src/
+    App.css
+    App.js
+    App.test.js
+    index.css
+    index.js
+    logo.svg
+    components/
+        Dashboard.js this is where the homepage / root of the application is. First you must login by selecting a user and then the default unanswered questions are shown which can be changed using the select form.
+        Leaderboard.js this is to show the leaders, only displayed if the user is logged in.
+        Nav.js this is the navigation bar which is shown at all times and helps the user move around
+        NewPoll.js this is the component to show the creation of a new poll, both questions must be populated before you can submit the format
+        notFound.js A 404 page that is shown if a url can not be resolved. Note the user is logged out when directed here.
+        poll.js This is a component to show the details of the poll on the Dashboard
+        PollPage.js this component shows a poll that has been asked by another or redirects to the details of the poll result if already answered.
+        PollResult.js if a poll has been answered by the logged in user then the details are shown by using this component.
+    actions/
+        authedUser.js used to create actions for logging and logging off a users
+        polls.js creating and receiving poll actions
+        shared.js common to all acitons
+        users.js user information actions.
+    reducers/
+        authedUser.js pure function to handle action changes of logged in user
+        index.js used to combine the reducers
+        polls.js pure function to handle action changes of polls
+        users.js pure function to handle action changes of users
 
 ## Data
 

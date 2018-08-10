@@ -15,7 +15,6 @@ class Dashboard extends Component {
     const v = e.target.value
     this.setState(() => ({
       display: v,
-
     }))
   }
 
