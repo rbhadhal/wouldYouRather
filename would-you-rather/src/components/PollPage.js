@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PollResult from './PollResult'
+import { Redirect } from 'react-router-dom'
+
 import { handleQuestionAnswerPoll  } from '../actions/polls'
 import { handleQuestionAnswerUser } from '../actions/users'
-import Poll from './poll'
-import PollResult from './PollResult'
-import { Link, withRouter, Redirect } from 'react-router-dom'
+
 
 
 class PollPage extends Component{
@@ -32,22 +33,19 @@ class PollPage extends Component{
       return  <Redirect to='/notFound'/>
     }
     const user = users[poll.author];
-    const {author, optionOne, optionTwo} = poll
+    const { optionOne, optionTwo} = poll
 
     if(authedUser === ''){
       return <Redirect to='/'/>
     }
     //test for answer already provided
     const answers = Object.keys(this.props.users[authedUser].answers)
-    console.log(`the answers array is ${answers}`)
     if(answers.includes(id))
     {
-      console.log('i have answered it')
       return <PollResult id={id}/>
     }
     return(
       <div className='poll'>
-
         <img
           src={user.avatarURL}
           alt={`Avatar of ${user.name}`}
@@ -80,7 +78,6 @@ function mapStateToProps ({authedUser, polls, users}, props){
     id,
     authedUser,
     poll: polls[id],
-    //user: users[polls[id].author],
     users: users
 
   }

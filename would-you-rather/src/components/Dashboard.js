@@ -19,6 +19,7 @@ class Dashboard extends Component {
     }))
   }
 
+
   handleUserChange = (e) => {(e)
     const dispatch = this.props.dispatch
     dispatch(setAuthedUser(e.target.value))

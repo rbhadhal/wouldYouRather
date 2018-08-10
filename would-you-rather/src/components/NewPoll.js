@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { handleAddPoll  } from '../actions/polls'
 import { connect } from 'react-redux'
-import { NavLink, Link, withRouter, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class NewPoll extends Component{
 
@@ -11,7 +11,7 @@ class NewPoll extends Component{
     home: false,
   }
 
-  handleChange = (e) => {
+  handleChange = (e) => {(e)
     const answerOne = e.target.name
     const v = e.target.value
 
@@ -23,21 +23,16 @@ class NewPoll extends Component{
   handleSubmit = (e) => {
     e.preventDefault()
     const {questionOne, questionTwo} = this.state
-    const {dispatch, id, authedUser} = this.props
-    console.log(`quesiton one: ${questionOne} quesiton two: ${questionTwo}`)
+    const {dispatch, id} = this.props
     dispatch(handleAddPoll(questionOne, questionTwo, id))
     this.setState(() => ({
       home: true,
     }))
-
-
-
   }
+
   render(){
     const {questionOne, questionTwo} = this.state
-    console.log(`authed user of new poll is ${this.props.authedUser}`)
 
-    console.log(`In render method of new poll and home is set to ${this.state.home}`)
     const { home } = this.state
     if (home === true){
       return <Redirect to='/'/>
@@ -86,5 +81,5 @@ function mapStateToProps ({authedUser}, props){
 
   }
 }
-
+// mapStateToProps
 export default connect(mapStateToProps)(NewPoll)

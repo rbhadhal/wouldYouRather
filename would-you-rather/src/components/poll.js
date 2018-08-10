@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatQuestion } from '../_DATA'
-import { Link, withRouter, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class Poll extends Component{
   state = {
@@ -12,12 +11,10 @@ class Poll extends Component{
       this.setState({
         redirect: true
       })
-    //// TODO:  check if answered, show result page if so and question page else.
     }
 
   render(){
     const {poll, user} = this.props
-
     if (poll === null){
       return <p>This question does not exist</p>
     }
@@ -27,18 +24,9 @@ class Poll extends Component{
 
     }
 
-    const {
-      author, optionOne, optionTwo} = poll
-
-
-
-
-    console.log(this.props)
+    const {optionOne, optionTwo} = poll
     return(
-
-
       <div className='poll'>
-
         <img
           src={user.avatarURL}
           alt={`Avatar of ${user.name}`}
@@ -52,20 +40,16 @@ class Poll extends Component{
             View Question
           </button>
         </div>
-
       </div>
     )
   }
 }
 
 function mapStateToProps({users, authedUser, polls}, {id}){
-  const poll = polls[id]
-  const user = users[poll.author]
-
   return {
     authedUser,
-    user: user,
-    poll: poll
+    user: users[polls[id].author],
+    poll: polls[id]
   }
 }
 
