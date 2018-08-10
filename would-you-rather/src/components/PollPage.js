@@ -27,8 +27,13 @@ class PollPage extends Component{
   }
 
   render(){
-    const {poll, user, authedUser, id} = this.props
+    const {poll, authedUser, id, users} = this.props
+    if (poll === undefined){
+      return  <Redirect to='/notFound'/>
+    }
+    const user = users[poll.author];
     const {author, optionOne, optionTwo} = poll
+
     if(authedUser === ''){
       return <Redirect to='/'/>
     }
@@ -75,7 +80,7 @@ function mapStateToProps ({authedUser, polls, users}, props){
     id,
     authedUser,
     poll: polls[id],
-    user: users[polls[id].author],
+    //user: users[polls[id].author],
     users: users
 
   }

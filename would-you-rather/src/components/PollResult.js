@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import { Redirect } from 'react-router-dom'
 
 class PollResult extends Component{
 
@@ -8,7 +8,7 @@ class PollResult extends Component{
     const {poll, user} = this.props
 
     if (poll === null){
-      return <p>This question does not exist</p>
+      return  <Redirect to='/notFound'/>
     }
 
     const {author, optionOne, optionTwo} = poll

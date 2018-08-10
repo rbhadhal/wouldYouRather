@@ -28,7 +28,8 @@ console.log(`t is ${Object.keys(t)}`)
 
 console.log(`new array is ${tempArray['johndoe']}`)
 const sortedArray = Object.keys(t).sort((a,b) => t[b].total - t[a].total) // this funcitons sorts the ids in the keys by sort function ie. total values
-console.log(`sorted array ${sortedArray}`)
+const s = Object.keys(users).sort((a,b) => ((Object.keys(users[b].answers).length) + users[b].questions.length) - ((Object.keys(users[a].answers).length) + users[a].questions.length))
+console.log(`sorted array ${sortedArray} versus my new inline array ${s}`)
 
 console.log(`sorted array first total is ${sortedArray[0]} and the last item is ${sortedArray[4]}`)
 return(
