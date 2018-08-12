@@ -34,6 +34,7 @@ class Dashboard extends Component {
           <label>
             Please login first:
           <select value={this.props.authedUser} onChange={this.handleUserChange} onSubmit= {this.handleUserChange}>
+            <option value='' disabled/>
             <option value='tylermcginnis'>tylermcginnis</option>
             <option value='johndoe'>johndoe</option>
             <option value='sarahedo'>sarahedo</option>
